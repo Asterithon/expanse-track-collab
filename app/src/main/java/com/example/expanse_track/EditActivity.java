@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +20,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class EditActivity extends AppCompatActivity {
 
-    TextView showId, showAmount, showDesc, showDate, showType;
+    private TextView showId, showDate, showType, tvType;
+    private ImageView ivIcon;
 
-    private EditText inpAmount, inpDesc, inpDate, inpType;
-    private Button btnDashboard, btnSubmit;
+    private EditText inpAmount, inpDesc;
+    private Button btnSubmit;
+    private ImageButton btnDashboard;
 
 
     @Override
@@ -36,14 +40,16 @@ public class EditActivity extends AppCompatActivity {
         });
 
         showId = findViewById(R.id.show_id);
-        showDesc = findViewById(R.id.show_desc);
-        showAmount = findViewById(R.id.show_amount);
+        showId.setVisibility(View.GONE);
         showDate = findViewById(R.id.show_date);
+        showDate.setVisibility(View.GONE);
         showType = findViewById(R.id.show_type);
-        inpType = findViewById(R.id.inp_type);
+        showType.setVisibility(View.GONE);
         inpAmount = findViewById(R.id.inp_amount);
         inpDesc = findViewById(R.id.inp_desc);
-        inpDate = findViewById(R.id.inp_date);
+        tvType = findViewById(R.id.tv_type);
+        ivIcon = findViewById(R.id.iv_icon);
+
 
 
         btnDashboard = findViewById(R.id.btn_dashboard);
@@ -77,23 +83,22 @@ public class EditActivity extends AppCompatActivity {
             String date = data.getString(2);
             String strtype = data.getString(3);
 
-        try {
-            int angka = Integer.parseInt(stramount);
-            inpAmount.setText(String.valueOf(angka));
-        } catch (NumberFormatException e) {
-            inpAmount.setText("0"); // Default jika terjadi kesalahan konversi
-        }
+            try {
+                int angka = Integer.parseInt(stramount);
+                inpAmount.setText(String.valueOf(angka));
+            } catch (NumberFormatException e) {
+                inpAmount.setText("0"); // Default jika terjadi kesalahan konversi
+            }
 
-        inpType.setText(strtype);
-        inpDate.setText(date);
-        inpDesc.setText(description);
-        showId.setText(strid);
-        showId.setVisibility(View.GONE);
-        showDesc.setText(String.format("Desc = %s", description));
-        showAmount.setText(String.format("Amount = %s", stramount));
-        showDate.setText(String.format("Date = %s", date));
-        showType.setText(String.format("Type = %s", strtype));
-    }}
+            inpDesc.setText(description);
+            showId.setText(strid);
+            showDate.setText(date);
+            showType.setText(strtype);
+
+            int type = Integer.parseInt(strtype);
+            ivIcon.setImageResource(type == 0 ? R.drawable.baseline_arrow_downward_24 : R.drawable.baseline_arrow_upward_24);
+            tvType.setText(type == 0 ? "Expense" : "Income");
+        }}
     private void dashboard() {
         Intent goDashboard = new Intent(this, MainActivity.class);
         startActivity(goDashboard);
@@ -102,8 +107,8 @@ public class EditActivity extends AppCompatActivity {
     private void saveTransaction() {
         String stramount = "" + inpAmount.getText();
         String desc = "" + inpDesc.getText();
-        String date = "" + inpDate.getText();
-        String tipe = "" + inpType.getText();
+        String date = showDate.getText().toString();
+        String tipe =  showType.getText().toString();
         String strid = showId.getText().toString();
 
         int id = Integer.parseInt(strid);
@@ -117,7 +122,7 @@ public class EditActivity extends AppCompatActivity {
 
         String sql = "UPDATE `transaction` SET `amount` = ?, `description` = ?, `date` = ?, `type` = ?  WHERE `id` = ?;";
         db.execSQL(sql, new Object[]{t.getAmount(), t.getDescription(), t.getDate(), t.getType(), t.getId()});
-
+        Toast.makeText(this, "Transaction Edited Successfully", Toast.LENGTH_LONG).show();
         finish();
 
     }
