@@ -7,34 +7,194 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="50dp">
+        android:padding="20dp"
+        android:background="@color/bone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:paddingBottom="20dp"
+            android:textStyle="bold"/>
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_input"
-            android:text="Record Transaction"/>
+            android:orientation="vertical"
+            android:background="@drawable/headbg"
+            android:padding="30dp">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_show_income"
-            android:text="See Income"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_show_expense"
-            android:text="See Expense"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Balance"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/tv_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Rp 1.680.000"
+                android:textSize="35sp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingBottom="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/baseline_arrow_upward_24"
+                    android:background="@drawable/bg_icon"
+                    android:layout_marginRight="5dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="6dp"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
+                            android:text="Income"
+                            android:textColor="#dbd9d9"
+                            android:textSize="15sp"
+                            />
+                        <TextView
+                            android:id="@+id/tv_revenue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="1.150.000"
+                            android:fontFamily="sans-serif-medium"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/baseline_arrow_downward_24"
+                        android:background="@drawable/bg_icon"
+                        android:layout_marginRight="5dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="6dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
+                            android:text="Expenses"
+                            android:textColor="#dbd9d9"
+                            android:textSize="15sp"
+                            />
+                        <TextView
+                            android:id="@+id/tv_expense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1.150.000"
+                            android:fontFamily="sans-serif-medium"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
 
-        <ListView
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="20dp"
+                android:paddingBottom="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Recent Transactions"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginRight="20dp"/>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/list_transactions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#00000000"
+                android:dividerHeight="8dp" />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/list_transactions"/>
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:background="@drawable/headbg"
+            android:padding="10dp">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_show_income"
+                android:textSize="16dp"
+                android:text="View Income"
+                android:background="@android:color/transparent"
+                />
+            <ImageButton
+                android:id="@+id/btn_input"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_add"
+                android:src="@drawable/baseline_add_24"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="6dp"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_show_expense"
+                android:textSize="16dp"
+                android:text="View Expense"
+                android:background="@android:color/transparent"
+                />
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>
