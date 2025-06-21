@@ -6,7 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +18,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class DetailActivity extends AppCompatActivity {
-    TextView showId, showAmount, showDesc, showDate, showType;
-    Button btnDashboard;
+    TextView showId, showAmount, showDesc, showDate, tvType;
+    ImageButton btnDashboard;
+    Button btnDlt, btnEdt;
+    ImageView ivIcon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +36,24 @@ public class DetailActivity extends AppCompatActivity {
         showDesc = findViewById(R.id.show_desc);
         showAmount = findViewById(R.id.show_amount);
         showDate = findViewById(R.id.show_date);
-        showType = findViewById(R.id.show_type);
         btnDashboard = findViewById(R.id.btn_dashboard);
+        btnDlt = findViewById(R.id.btn_dlt);
+        btnEdt = findViewById(R.id.btn_edt);
 
+        ivIcon = findViewById(R.id.iv_icon);
+        tvType = findViewById(R.id.tv_type);
+        btnDlt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delete();
+            }
+        });
+        btnEdt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edit();
+            }
+        });
         btnDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,16 +77,34 @@ public class DetailActivity extends AppCompatActivity {
             // Masukkan data ke dalam EditText atau TextView
             showId.setText(strid);
             showId.setVisibility(View.GONE);
-            showDesc.setText(String.format("Desc = %s", description));
-            showAmount.setText(String.format("Amount = %s", stramount));
-            showDate.setText(String.format("Date = %s", date));
-            showType.setText(String.format("Type = %s", strtype));
+            showDesc.setText(String.format("Description:  %s", description));
+            showAmount.setText(String.format("Amount: %s", stramount));
+            showDate.setText(String.format("Date: %s", date));
+
+            int type = Integer.parseInt(strtype);
+            ivIcon.setImageResource(type == 0 ? R.drawable.baseline_arrow_downward_24 : R.drawable.baseline_arrow_upward_24);
+            tvType.setText(type == 0 ? "Expense" : "Income");
 
         }
     }
     private void dashboard() {
         Intent goDashboard = new Intent(this, MainActivity.class);
         startActivity(goDashboard);
+    }
+    private void edit() {
+        Intent goEdit = new Intent(this, EditActivity.class);
+        goEdit.putExtra("id", String.valueOf(showId.getText()));
+        startActivity(goEdit);
+        finish();
+    }
+
+    private void delete() {
+        DbHelper dbHelper = new DbHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String sql = "DELETE FROM `transaction` WHERE id = ?;";
+        db.execSQL(sql, new Object[] {showId.getText()});
+        Toast.makeText(this, "Transaction Deleted Succesfully", Toast.LENGTH_LONG).show();
+        finish();
     }
 
 }
