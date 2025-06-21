@@ -1,11 +1,18 @@
 package com.example.expanse_track;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +20,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class InputActivity extends AppCompatActivity {
 
-    private EditText inpAmount, inpDesc, inpDate, inpType;
-    Button btnDashboard, btnSubmit;
+    private TextView tvSelectedDate;
+    private EditText inpAmount, inpDesc;
+    private RadioGroup rdGroup;
+    private RadioButton rdExpense, rdRevenue;
+    Button btnSubmit, btnSelectDate;
+    ImageButton btnDashboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +44,32 @@ public class InputActivity extends AppCompatActivity {
             return insets;
         });
 
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String todayDate = sdf.format(calendar.getTime());
+        btnSelectDate = findViewById(R.id.btnSelectDate);
+        tvSelectedDate = findViewById(R.id.tvSelectedDate);
+        tvSelectedDate.setText(todayDate);
+        btnSelectDate.setOnClickListener(v -> {
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    (view, selectedYear, selectedMonth, selectedDay) -> {
+                        String selectedDate = selectedDay + "-" + (selectedMonth + 1) + "-" + selectedYear;
+                        tvSelectedDate.setText(selectedDate);
+                    }, year, month, day);
+            datePickerDialog.show();
+        });
 
         inpAmount = findViewById(R.id.inp_amount);
         inpDesc = findViewById(R.id.inp_desc);
-        inpDate = findViewById(R.id.inp_date);
-        inpType = findViewById(R.id.inp_type);
-
         btnDashboard = findViewById(R.id.btn_dashboard);
         btnSubmit = findViewById(R.id.btn_submit);
+        rdGroup = findViewById(R.id.rd_group);
+        rdExpense = findViewById(R.id.rd_expense);
+        rdRevenue = findViewById(R.id.rd_revenue);
 
         btnDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,12 +94,21 @@ public class InputActivity extends AppCompatActivity {
     private void saveTransaction() {
         String stramount = "" + inpAmount.getText();
         String desc = "" + inpDesc.getText();
-        String date = "" + inpDate.getText();
-        String tipe = "" + inpType.getText();
+        String date = "" + tvSelectedDate.getText();
 
         Integer id=0;
         int amount = Integer.parseInt(stramount);
-        int type = Integer.parseInt(tipe);
+
+        int selectedId = rdGroup.getCheckedRadioButtonId();
+        int type = -1; // default
+
+        if (selectedId == R.id.rd_expense) {
+            type = 0;  // Pengeluaran = 0
+            rdExpense.setTextColor(Color.WHITE);
+        } else if (selectedId == R.id.rd_revenue) {
+            type = 1;  // Pemasukan = 1
+            rdRevenue.setTextColor(Color.WHITE);
+        }
 
         Transaction t = new Transaction(amount, desc, date, type, id);
 
@@ -76,7 +118,7 @@ public class InputActivity extends AppCompatActivity {
 
         String sql = "INSERT INTO `transaction`(`amount`, `description`, `date`, `type`) VALUES (?,?,?,?);";
         db.execSQL(sql, new Object[]{t.getAmount(), t.getDescription(), t.getDate(), t.getType()});
-
+        Toast.makeText(this, "Transaction Recorded Successfully", Toast.LENGTH_LONG).show();
         finish();
 
     }
