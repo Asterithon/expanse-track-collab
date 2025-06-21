@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ public class ExpenseActivity extends AppCompatActivity {
 
     private ListView lvTransactions;
     private ArrayList<Transaction> list = new ArrayList<>();
-    private Button btnDashboard;
+    private ImageButton btnDashboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +64,9 @@ public class ExpenseActivity extends AppCompatActivity {
 
     private void itemlongclick(int i) {
         Transaction t = list.get(i);
-        String[] menu = new String[] {"edit", "hapus"};
+        String[] menu = new String[] {"Edit", "Delete"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("ini title");
+        builder.setTitle("Action:");
         builder.setItems(menu, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
@@ -92,6 +93,7 @@ public class ExpenseActivity extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String sql = "DELETE FROM `transaction` WHERE `id` = ?;";
         db.execSQL(sql, new Object[] {t.getId()});
+        Toast.makeText(this, "Transaction Deleted Successfully", Toast.LENGTH_LONG).show();
         refresh();
     }
 
@@ -135,8 +137,8 @@ public class ExpenseActivity extends AppCompatActivity {
         }
 
         //update ke list bang
-        lvTransactions.setAdapter(new ArrayAdapter<Transaction>(this,
-                android.R.layout.simple_list_item_1, list));
+        TransactionAdapter adapter = new TransactionAdapter(this, list);
+        lvTransactions.setAdapter(adapter);
     }
 
 }
