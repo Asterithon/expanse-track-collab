@@ -16,29 +16,9 @@
         android:text="show_id"
         tools:layout_editor_absoluteX="150dp"
         tools:layout_editor_absoluteY="236dp" />
-    <TextView
-        android:id="@+id/show_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="show_amount"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="390dp" />
 
-    <TextView
-        android:id="@+id/show_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="show_desc"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="302dp" />
 
-    <TextView
-        android:id="@+id/show_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="show_date"
-        tools:layout_editor_absoluteX="189dp"
-        tools:layout_editor_absoluteY="439dp" />
+
     <TextView
         android:id="@+id/show_type"
         android:layout_width="wrap_content"
@@ -47,49 +27,117 @@
         tools:layout_editor_absoluteX="150dp"
         tools:layout_editor_absoluteY="236dp" />
 
-    <Button
-        android:id="@+id/btn_dashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="dashboard"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="50dp">
-
-        <EditText
-            android:id="@+id/inp_amount"
+        android:padding="20dp"
+        android:background="@color/bone"
+        >
+        <ImageButton
+            android:id="@+id/btn_dashboard"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_add"
+            android:src="@drawable/baseline_arrow_back_ios_24"
+            android:layout_marginHorizontal="6dp"
+            />
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Jumlah Pengeluaran"/>
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expense"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="10dp"
+                android:textSize="20dp" />
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/baseline_arrow_downward_24"
+                android:background="@drawable/bg_icon" />
+        </LinearLayout>
+          <TextView
+              android:id="@+id/show_date"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="19-6-2025"
+              android:gravity="center"
+              tools:layout_editor_absoluteX="189dp"
+              tools:layout_editor_absoluteY="439dp" />
 
-        <EditText
-            android:id="@+id/inp_desc"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Deskripsi Pengeluaran"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingVertical="30dp">
 
-        <EditText
-            android:id="@+id/inp_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tanggal Pengeluaran"
-            android:inputType="date" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Amount"
+                android:layout_marginLeft="10dp"
+                tools:layout_editor_absoluteX="189dp"
+                tools:layout_editor_absoluteY="439dp" />
+            <EditText
+                android:id="@+id/inp_amount"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_edittext_rounded"
+                android:hint="$$$"
+                android:inputType="numberDecimal"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textColor="@color/black"
+                android:textColorHint="#B0B8C9"
+                android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/inp_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="tipe 1 or 0"
-            android:inputType="text" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Note"
+                android:layout_marginLeft="10dp"
+                tools:layout_editor_absoluteX="189dp"
+                tools:layout_editor_absoluteY="439dp" />
 
-        <Button
-            android:id="@+id/btn_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="submit"/>
+            <EditText
+                android:id="@+id/inp_desc"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_edittext_rounded"
+                android:gravity="top|start"
+                android:hint="Note"
+                android:inputType="textMultiLine"
+                android:paddingVertical="20dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textColor="@color/black"
+                android:textColorHint="#B0B8C9"
+                android:textSize="16sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="bottom">
+                    <Button
+                        android:id="@+id/btn_submit"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="SAVE"
+                        android:textStyle="bold"
+                        android:background="@drawable/btn_save"
+                        app:backgroundTint="@null"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
