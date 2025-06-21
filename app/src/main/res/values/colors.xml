@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bone">#EDEDED</color>
+    <color name="expense">#DAFB1F68</color>
+    <color name="revenue">#E572B474</color>
 </resources>
