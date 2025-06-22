@@ -1,5 +1,6 @@
 package com.example.expanse_track;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -45,7 +46,7 @@ public class InputActivity extends AppCompatActivity {
         });
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String todayDate = sdf.format(calendar.getTime());
         btnSelectDate = findViewById(R.id.btnSelectDate);
         tvSelectedDate = findViewById(R.id.tvSelectedDate);
@@ -57,7 +58,7 @@ public class InputActivity extends AppCompatActivity {
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                     (view, selectedYear, selectedMonth, selectedDay) -> {
-                        String selectedDate = selectedDay + "-" + (selectedMonth + 1) + "-" + selectedYear;
+                        @SuppressLint("DefaultLocale") String selectedDate = String.format("%02d-%02d-%04d", selectedDay, selectedMonth + 1, selectedYear);
                         tvSelectedDate.setText(selectedDate);
                     }, year, month, day);
             datePickerDialog.show();

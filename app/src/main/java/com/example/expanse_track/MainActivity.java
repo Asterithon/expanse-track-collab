@@ -137,13 +137,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showIncome() {
-        Intent goIncome = new Intent(this, IncomeActivity.class);
-        startActivity(goIncome);
+        String type = "1";
+        Intent goTransaction = new Intent(this, TransactionActivity.class);
+        goTransaction.putExtra("type", type);
+        startActivity(goTransaction);
     }
 
     private void showExpense() {
-        Intent goExpense = new Intent(this, ExpenseActivity.class);
-        startActivity(goExpense);
+        String type = "0";
+        Intent goTransaction = new Intent(this, TransactionActivity.class);
+        goTransaction.putExtra("type", type);
+        startActivity(goTransaction);
     }
 
     private void input() {
@@ -161,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         DbHelper dbHelper = new DbHelper(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String sql = "SELECT `id`, `amount`, `description`, `date`, `type` FROM `transaction`";
+        String sql = "SELECT `id`, `amount`, `description`, `date`, `type` FROM `transaction` ORDER BY date DESC, id DESC";
         Cursor c = db.rawQuery(sql, new String[0]);
 
         //ambil data dari database

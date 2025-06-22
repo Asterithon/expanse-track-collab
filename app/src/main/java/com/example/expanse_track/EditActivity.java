@@ -100,8 +100,9 @@ public class EditActivity extends AppCompatActivity {
             tvType.setText(type == 0 ? "Expense" : "Income");
         }}
     private void dashboard() {
-        Intent goDashboard = new Intent(this, MainActivity.class);
-        startActivity(goDashboard);
+//        Intent goDashboard = new Intent(this, MainActivity.class);
+//        startActivity(goDashboard);
+        finish();
     }
 
     private void saveTransaction() {

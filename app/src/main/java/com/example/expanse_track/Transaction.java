@@ -1,5 +1,8 @@
 package com.example.expanse_track;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Transaction {
     private int amount;
     private String description;
@@ -38,9 +41,15 @@ public class Transaction {
         return id;
     }
 
+
+
     @Override
     public String toString() {
-        return "Jumlah: " + amount + "\nDeskripsi: "
+        NumberFormat formatID = NumberFormat.getInstance(new Locale("id", "ID"));
+        String formattedAmount = formatID.format(amount);
+
+        return "Jumlah: " + formattedAmount + "\nDeskripsi: "
                 + description + "\nTanggal: " + date + "\ntipe: " + type + "\nid: " + id;
     }
+
 }

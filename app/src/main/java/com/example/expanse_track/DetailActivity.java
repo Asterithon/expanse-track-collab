@@ -88,8 +88,9 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
     private void dashboard() {
-        Intent goDashboard = new Intent(this, MainActivity.class);
-        startActivity(goDashboard);
+//        Intent goDashboard = new Intent(this, MainActivity.class);
+//        startActivity(goDashboard);
+        finish();
     }
     private void edit() {
         Intent goEdit = new Intent(this, EditActivity.class);
