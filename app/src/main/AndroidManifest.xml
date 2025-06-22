@@ -19,9 +19,6 @@
             android:name=".EditActivity"
             android:exported="false" />
         <activity
-            android:name=".placeholder.EditActivity"
-            android:exported="false" />
-        <activity
             android:name=".DetailActivity"
             android:exported="false" />
         <activity
