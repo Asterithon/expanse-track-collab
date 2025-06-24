@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView lvTransactions;
     private TextView tvTotal, tvRevenue, tvExpense;
     private ArrayList<Transaction> list = new ArrayList<>();
-    Button btnShowIncome, btnShowExpense;
+    Button btnShowTransaction;
     ImageButton btnInput;
 
     @Override
@@ -51,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
         tvRevenue = findViewById(R.id.tv_revenue);
         tvExpense = findViewById(R.id.tv_expense);
         btnInput = findViewById(R.id.btn_input);
-        btnShowExpense = findViewById(R.id.btn_show_expense);
-        btnShowIncome = findViewById(R.id.btn_show_income);
+        btnShowTransaction = findViewById(R.id.btn_show_transaction);
         lvTransactions = findViewById(R.id.list_transactions);
 
     lvTransactions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,17 +75,11 @@ public class MainActivity extends AppCompatActivity {
         }
     });
 
-    btnShowExpense.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            showExpense();
-        }
-    });
 
-    btnShowIncome.setOnClickListener(new View.OnClickListener() {
+    btnShowTransaction.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            showIncome();
+            showTransaction();
         }
     });
 
@@ -136,15 +129,12 @@ public class MainActivity extends AppCompatActivity {
         refresh();
     }
 
-    private void showIncome() {
-        String type = "1";
-        Intent goTransaction = new Intent(this, TransactionActivity.class);
-        goTransaction.putExtra("type", type);
-        startActivity(goTransaction);
-    }
-
-    private void showExpense() {
-        String type = "0";
+//    |
+//    | INI BTN KE ALL TRANSACTION
+//    |
+//    V
+    private void showTransaction() {
+        String type = "all";
         Intent goTransaction = new Intent(this, TransactionActivity.class);
         goTransaction.putExtra("type", type);
         startActivity(goTransaction);

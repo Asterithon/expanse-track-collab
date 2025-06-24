@@ -168,10 +168,15 @@
             android:paddingVertical="10dp"
             android:background="@drawable/headbg"
             android:padding="10dp">
+
+<!--            |-->
+<!--            | INI BTN KE ALL TRANSACTION-->
+<!--            |-->
+<!--            V-->
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_show_income"
+                android:id="@+id/btn_show_transaction"
                 android:textSize="16dp"
                 android:text="View Income"
                 android:background="@android:color/transparent"
@@ -190,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_show_expense"
                 android:textSize="16dp"
-                android:text="View Expense"
+                android:text="hapus ni btn"
                 android:background="@android:color/transparent"
                 />
         </LinearLayout>
