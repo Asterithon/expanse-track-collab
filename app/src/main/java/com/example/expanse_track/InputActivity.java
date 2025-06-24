@@ -88,8 +88,7 @@ public class InputActivity extends AppCompatActivity {
     }
 
     private void dashboard() {
-        Intent goDashboard = new Intent(this, MainActivity.class);
-        startActivity(goDashboard);
+        finish();
     }
 
     private void saveTransaction() {
