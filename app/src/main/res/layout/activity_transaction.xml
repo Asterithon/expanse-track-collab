@@ -8,96 +8,140 @@
     android:orientation="vertical"
     tools:context=".TransactionActivity"
     android:background="@color/bone">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <ImageButton
-            android:id="@+id/btn_dashboard"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:background="@drawable/bg_add"
-            android:src="@drawable/baseline_arrow_back_ios_24"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:layout_marginTop="30dp"
-            android:text="Transaction"/>
-    </RelativeLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_edittext_rounded"
-        android:padding="8dp">
-
-        <RadioGroup
-            android:id="@+id/rd_group"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:orientation="vertical">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            >
+            <ImageButton
+                android:id="@+id/btn_dashboard"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_add"
+                android:src="@drawable/baseline_arrow_back_ios_24"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
 
-            <RadioButton
-                android:id="@+id/rd_expense"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/rdbtn_expnese_toggle"
-                android:button="@null"
-                android:checked="true"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="Expense"
-                android:textColor="@drawable/rdbtn_set_text"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:text="Transactions"
+                android:textSize="20sp"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_transactiontypes"
+                android:padding="6dp">
 
-            <RadioButton
-                android:id="@+id/rd_all"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                <RadioGroup
+                    android:id="@+id/rd_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rd_expense"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_type_radiobtn"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="Expense"
+                        android:textColor="@drawable/rdbtn_set_text"
+                        android:textStyle="bold" />
+
+                    <RadioButton
+                        android:id="@+id/rd_all"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_type_radiobtn"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="All"
+                        android:textColor="@drawable/rdbtn_set_text"
+                        android:textStyle="bold" />
+                    <RadioButton
+                        android:id="@+id/rd_income"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_type_radiobtn"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="Income"
+                        android:textColor="@drawable/rdbtn_set_text"
+                        android:textStyle="bold" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/list_transactions"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/rdbtn_revenue_toggle"
-                android:button="@null"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="All Transaction"
-                android:textColor="@drawable/rdbtn_set_text"
-                android:textStyle="bold" />
-            <RadioButton
-                android:id="@+id/rd_income"
+                android:divider="#00000000"
+                android:dividerHeight="8dp"
+                android:layout_marginVertical="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:background="@drawable/headbg"
+            android:padding="10dp">
+
+            <ImageButton
+                android:id="@+id/btn_home"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/rdbtn_expnese_toggle"
-                android:button="@null"
-                android:checked="true"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="Income"
-                android:textColor="@drawable/rdbtn_set_text"
-                android:textStyle="bold" />
-        </RadioGroup>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:src="@drawable/round_home_24"
+                android:text="View Income" />
+            <ImageButton
+                android:id="@+id/btn_input"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_add"
+                android:src="@drawable/round_add_24"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="6dp"
+                />
+            <ImageButton
+                android:id="@+id/btn_show_transaction"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:src="@drawable/round_dns_24"
+                android:text="View Income" />
+        </LinearLayout>
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/btn_input"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:background="@drawable/bg_add"
-        android:src="@drawable/baseline_add_24"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="6dp"
-        />
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:id="@+id/list_transactions"
-        android:divider="#00000000"
-        android:dividerHeight="8dp"/>
-
 </LinearLayout>
