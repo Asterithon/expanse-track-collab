@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView lvTransactions;
     private TextView tvTotal, tvRevenue, tvExpense;
     private ArrayList<Transaction> list = new ArrayList<>();
-    Button btnShowTransaction;
-    ImageButton btnInput;
+    Button btnViewall;
+    ImageButton btnInput, btnShowTransaction, btnHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         btnInput = findViewById(R.id.btn_input);
         btnShowTransaction = findViewById(R.id.btn_show_transaction);
         lvTransactions = findViewById(R.id.list_transactions);
+        btnViewall = findViewById(R.id.btn_viewall);
+        btnHome = findViewById(R.id.btn_home);
 
     lvTransactions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
@@ -75,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
         }
     });
 
+    btnViewall.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showTransaction();
+        }
+    });
 
     btnShowTransaction.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -204,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvRevenue.setText(formattedRevenue);
         tvExpense.setText(formattedExpense);
-        tvTotal.setText("Rp " + formattedBalance);
+        tvTotal.setText("IDR " + formattedBalance);
 
     }
 
