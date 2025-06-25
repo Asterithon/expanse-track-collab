@@ -41,8 +41,7 @@ public class EditActivity extends AppCompatActivity {
 
         showId = findViewById(R.id.show_id);
         showId.setVisibility(View.GONE);
-        showDate = findViewById(R.id.show_date);
-        showDate.setVisibility(View.GONE);
+        showDate = findViewById(R.id.tv_date);
         showType = findViewById(R.id.show_type);
         showType.setVisibility(View.GONE);
         inpAmount = findViewById(R.id.inp_amount);
