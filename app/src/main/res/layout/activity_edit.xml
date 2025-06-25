@@ -9,7 +9,6 @@
     android:background="@color/bone"
     tools:context=".EditActivity">
 
-
     <TextView
         android:id="@+id/show_id"
         android:layout_width="wrap_content"
@@ -17,8 +16,6 @@
         android:text="show_id"
         tools:layout_editor_absoluteX="150dp"
         tools:layout_editor_absoluteY="236dp" />
-
-
 
     <TextView
         android:id="@+id/show_type"
@@ -33,21 +30,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="20dp"
-        android:background="@color/bone"
-        >
+        android:background="@color/bone">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
             <ImageButton
-                android:id="@+id/btn_dashboard"
+                android:id="@+id/btn_back"
                 android:layout_width="46dp"
                 android:layout_height="46dp"
                 android:background="@drawable/bg_add"
                 android:src="@drawable/baseline_arrow_back_ios_24"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,6 +52,7 @@
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true" />
         </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,8 +83,7 @@
                 android:textStyle="bold"
                 android:textSize="16dp"
                 android:textColor="#7C7C7C"
-                android:layout_marginLeft="20dp"
-                />
+                android:layout_marginLeft="20dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -104,8 +99,7 @@
                 android:paddingBottom="6dp"
                 android:textStyle="bold"
                 android:textSize="16dp"
-                android:textColor="#7C7C7C"
-                />
+                android:textColor="#7C7C7C" />
             <EditText
                 android:id="@+id/inp_amount"
                 android:layout_width="match_parent"
@@ -120,11 +114,11 @@
                 android:textColorHint="#B0B8C9"
                 android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,8 +127,7 @@
                 android:paddingBottom="6dp"
                 android:textStyle="bold"
                 android:textSize="16dp"
-                android:textColor="#7C7C7C"
-                />
+                android:textColor="#7C7C7C" />
             <EditText
                 android:id="@+id/inp_desc"
                 android:layout_width="match_parent"
@@ -151,6 +144,7 @@
                 android:textColorHint="#B0B8C9"
                 android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -166,5 +160,7 @@
                 android:background="@drawable/btn_save"
                 app:backgroundTint="@null"/>
         </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>

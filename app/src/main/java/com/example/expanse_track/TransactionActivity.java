@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class TransactionActivity extends AppCompatActivity {
     private ListView lvTransactions;
     private ArrayList<Transaction> list = new ArrayList<>();
-    private ImageButton btnDashboard, btnInput, btnHome;
+    private ImageButton btnBack, btnInput, btnHome;
     private RadioGroup rdGroup;
     private RadioButton rdExpense, rdAll, rdIncome;
     // Ambil data dari intent
@@ -46,7 +46,7 @@ public class TransactionActivity extends AppCompatActivity {
         lvTransactions = findViewById(R.id.list_transactions);
 
 
-        btnDashboard = findViewById(R.id.btn_dashboard);
+        btnBack = findViewById(R.id.btn_back);
         btnInput = findViewById(R.id.btn_input);
         rdGroup = findViewById(R.id.rd_group);
         rdIncome = findViewById(R.id.rd_income);
@@ -79,7 +79,7 @@ public class TransactionActivity extends AppCompatActivity {
                 input();
             }
         });
-        btnDashboard.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dashboard();
@@ -129,7 +129,6 @@ public class TransactionActivity extends AppCompatActivity {
         Intent goDetail = new Intent(this, DetailActivity.class);
         goDetail.putExtra("id", String.valueOf(t.getId()));
         startActivity(goDetail);
-        Toast.makeText(this, t.getDescription(), Toast.LENGTH_LONG).show();
     }
 
     private void dashboard() {

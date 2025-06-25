@@ -25,7 +25,7 @@ public class EditActivity extends AppCompatActivity {
 
     private EditText inpAmount, inpDesc;
     private Button btnSubmit;
-    private ImageButton btnDashboard;
+    private ImageButton btnBack;
 
 
     @Override
@@ -51,10 +51,10 @@ public class EditActivity extends AppCompatActivity {
 
 
 
-        btnDashboard = findViewById(R.id.btn_dashboard);
+        btnBack = findViewById(R.id.btn_back);
         btnSubmit = findViewById(R.id.btn_submit);
 
-        btnDashboard.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dashboard();

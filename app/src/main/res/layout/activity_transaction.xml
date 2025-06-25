@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             >
             <ImageButton
-                android:id="@+id/btn_dashboard"
+                android:id="@+id/btn_back"
                 android:layout_width="46dp"
                 android:layout_height="46dp"
                 android:background="@drawable/bg_add"

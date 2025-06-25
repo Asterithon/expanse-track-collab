@@ -8,6 +8,7 @@
     tools:context=".InputActivity"
     android:background="@color/bone"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,17 +24,15 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
                 <ImageButton
-                    android:id="@+id/btn_dashboard"
+                    android:id="@+id/btn_back"
                     android:layout_width="46dp"
                     android:layout_height="46dp"
                     android:background="@drawable/bg_add"
                     android:src="@drawable/baseline_arrow_back_ios_24"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,8 +56,7 @@
                     android:paddingBottom="6dp"
                     android:textStyle="bold"
                     android:textSize="16dp"
-                    android:textColor="#7C7C7C"
-                    />
+                    android:textColor="#7C7C7C" />
                 <EditText
                     android:id="@+id/inp_amount"
                     android:layout_width="match_parent"
@@ -86,7 +84,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="#B0B8C9"
                 android:textSize="16sp">
-
                 <Button
                     android:id="@+id/btnSelectDate"
                     android:layout_width="wrap_content"
@@ -95,7 +92,6 @@
                     android:background="@drawable/btn_date"
                     android:text="Date"
                     app:backgroundTint="@null" />
-
                 <TextView
                     android:id="@+id/tvSelectedDate"
                     android:layout_width="match_parent"
@@ -107,11 +103,11 @@
                     android:textColor="@color/black"
                     android:textColorHint="#B0B8C9" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -120,8 +116,7 @@
                     android:paddingBottom="6dp"
                     android:textStyle="bold"
                     android:textSize="16dp"
-                    android:textColor="#7C7C7C"
-                    />
+                    android:textColor="#7C7C7C" />
                 <EditText
                     android:id="@+id/inp_desc"
                     android:layout_width="match_parent"
@@ -144,13 +139,11 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edittext_rounded"
                 android:padding="8dp">
-
                 <RadioGroup
                     android:id="@+id/rd_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
                     <RadioButton
                         android:id="@+id/rd_expense"
                         android:layout_width="0dp"
@@ -164,7 +157,6 @@
                         android:text="Expenses"
                         android:textColor="@drawable/rdbtn_set_text"
                         android:textStyle="bold" />
-
                     <RadioButton
                         android:id="@+id/rd_revenue"
                         android:layout_width="0dp"

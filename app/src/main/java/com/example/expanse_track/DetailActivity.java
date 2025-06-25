@@ -22,7 +22,7 @@ import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
     TextView showId, showAmount, showDesc, showDate, tvType;
-    ImageButton btnDashboard, btnHome;
+    ImageButton btnBack, btnHome, btnInput, btnShowTransaction;
     Button btnDlt, btnEdt;
     ImageView ivIcon;
     @Override
@@ -39,7 +39,9 @@ public class DetailActivity extends AppCompatActivity {
         showDesc = findViewById(R.id.show_desc);
         showAmount = findViewById(R.id.show_amount);
         showDate = findViewById(R.id.show_date);
-        btnDashboard = findViewById(R.id.btn_dashboard);
+        btnBack = findViewById(R.id.btn_back);
+        btnInput =findViewById(R.id.btn_input);
+        btnShowTransaction = findViewById(R.id.btn_show_transaction);
         btnHome = findViewById(R.id.btn_home);
         btnDlt = findViewById(R.id.btn_dlt);
         btnEdt = findViewById(R.id.btn_edt);
@@ -47,6 +49,18 @@ public class DetailActivity extends AppCompatActivity {
         ivIcon = findViewById(R.id.iv_icon);
         tvType = findViewById(R.id.tv_type);
 
+        btnShowTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTransaction();
+            }
+        });
+        btnInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                input();
+            }
+        });
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
                 edit();
             }
         });
-        btnDashboard.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dashboard();
@@ -102,6 +116,18 @@ public class DetailActivity extends AppCompatActivity {
             tvType.setText(type == 0 ? "Expense" : "Income");
 
         }
+    }
+
+    private void showTransaction() {
+        String type = "all";
+        Intent goTransaction = new Intent(this, TransactionActivity.class);
+        goTransaction.putExtra("type", type);
+        startActivity(goTransaction);
+    }
+
+    private void input() {
+        Intent goInput = new Intent(this, InputActivity.class);
+        startActivity(goInput);
     }
 
     private void home() {

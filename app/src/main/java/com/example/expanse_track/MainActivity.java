@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ImageButton;
@@ -32,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView lvTransactions;
     private TextView tvTotal, tvRevenue, tvExpense;
     private ArrayList<Transaction> list = new ArrayList<>();
-    Button btnViewall;
-    ImageButton btnInput, btnShowTransaction, btnHome;
+    private Button btnViewall;
+    private ImageButton btnInput, btnShowTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-
         tvTotal = findViewById(R.id.tv_total);
         tvRevenue = findViewById(R.id.tv_revenue);
         tvExpense = findViewById(R.id.tv_expense);
@@ -54,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         btnShowTransaction = findViewById(R.id.btn_show_transaction);
         lvTransactions = findViewById(R.id.list_transactions);
         btnViewall = findViewById(R.id.btn_viewall);
-        btnHome = findViewById(R.id.btn_home);
 
     lvTransactions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
@@ -62,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             itemClick(i);
         }
     });
+
     lvTransactions.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -133,14 +131,9 @@ public class MainActivity extends AppCompatActivity {
         Intent goDetail = new Intent(this, DetailActivity.class);
         goDetail.putExtra("id", String.valueOf(t.getId()));
         startActivity(goDetail);
-//        Toast.makeText(this, t.getDescription(), Toast.LENGTH_LONG).show();
         refresh();
     }
 
-//    |
-//    | INI BTN KE ALL TRANSACTION
-//    |
-//    V
     private void showTransaction() {
         String type = "all";
         Intent goTransaction = new Intent(this, TransactionActivity.class);
@@ -179,16 +172,14 @@ public class MainActivity extends AppCompatActivity {
             list.add(t);
         }
 
-        //update ke list bang
+        //update ke list
         TransactionAdapter adapter = new TransactionAdapter(this, list);
         lvTransactions.setAdapter(adapter);
-
 
         String sqlRevenue = "SELECT SUM(`amount`) AS total_revenue FROM `transaction` WHERE `type` = 1;";
         String sqlExpense = "SELECT SUM(`amount`) AS total_expense FROM `transaction` WHERE `type` = 0;";
         Cursor totalRev = db.rawQuery(sqlRevenue, null);
         Cursor totalExp = db.rawQuery(sqlExpense, null);
-
 
         double totalRevenue = 0;
         if (totalRev.moveToFirst()) {

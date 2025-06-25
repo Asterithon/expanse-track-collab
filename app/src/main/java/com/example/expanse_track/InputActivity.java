@@ -32,7 +32,7 @@ public class InputActivity extends AppCompatActivity {
     private RadioGroup rdGroup;
     private RadioButton rdExpense, rdRevenue;
     Button btnSubmit, btnSelectDate;
-    ImageButton btnDashboard;
+    ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +66,13 @@ public class InputActivity extends AppCompatActivity {
 
         inpAmount = findViewById(R.id.inp_amount);
         inpDesc = findViewById(R.id.inp_desc);
-        btnDashboard = findViewById(R.id.btn_dashboard);
+        btnBack = findViewById(R.id.btn_back);
         btnSubmit = findViewById(R.id.btn_submit);
         rdGroup = findViewById(R.id.rd_group);
         rdExpense = findViewById(R.id.rd_expense);
         rdRevenue = findViewById(R.id.rd_revenue);
 
-        btnDashboard.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dashboard();
