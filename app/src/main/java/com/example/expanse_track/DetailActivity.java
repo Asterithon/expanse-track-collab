@@ -17,9 +17,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class DetailActivity extends AppCompatActivity {
     TextView showId, showAmount, showDesc, showDate, tvType;
-    ImageButton btnDashboard;
+    ImageButton btnDashboard, btnHome;
     Button btnDlt, btnEdt;
     ImageView ivIcon;
     @Override
@@ -37,11 +40,19 @@ public class DetailActivity extends AppCompatActivity {
         showAmount = findViewById(R.id.show_amount);
         showDate = findViewById(R.id.show_date);
         btnDashboard = findViewById(R.id.btn_dashboard);
+        btnHome = findViewById(R.id.btn_home);
         btnDlt = findViewById(R.id.btn_dlt);
         btnEdt = findViewById(R.id.btn_edt);
 
         ivIcon = findViewById(R.id.iv_icon);
         tvType = findViewById(R.id.tv_type);
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                home();
+            }
+        });
         btnDlt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,17 +80,22 @@ public class DetailActivity extends AppCompatActivity {
         Cursor data = db.rawQuery(dt, new String[0]);
 
         if (data.moveToFirst()) {
-            String stramount = data.getString(0);
+            int stramount = data.getInt(0);
             String description = data.getString(1);
             String date = data.getString(2);
             String strtype = data.getString(3);
 
+
+            Locale localeID = new Locale("in", "ID");
+            NumberFormat formatNumber = NumberFormat.getNumberInstance(localeID);
+            String formattedAmount = formatNumber.format(stramount);
+
             // Masukkan data ke dalam EditText atau TextView
             showId.setText(strid);
-            showId.setVisibility(View.GONE);
-            showDesc.setText(String.format("Description:  %s", description));
-            showAmount.setText(String.format("Amount: %s", stramount));
-            showDate.setText(String.format("Date: %s", date));
+            showDate.setText(date);
+            showAmount.setText(String.format("IDR %s", formattedAmount));
+            showDesc.setText(description);
+
 
             int type = Integer.parseInt(strtype);
             ivIcon.setImageResource(type == 0 ? R.drawable.baseline_arrow_downward_24 : R.drawable.baseline_arrow_upward_24);
@@ -87,9 +103,13 @@ public class DetailActivity extends AppCompatActivity {
 
         }
     }
+
+    private void home() {
+        Intent goDashboard = new Intent(this, MainActivity.class);
+        startActivity(goDashboard);
+    }
+
     private void dashboard() {
-//        Intent goDashboard = new Intent(this, MainActivity.class);
-//        startActivity(goDashboard);
         finish();
     }
     private void edit() {
