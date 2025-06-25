@@ -8,7 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+
 public class TransactionAdapter extends ArrayAdapter<Transaction> {
     private TextView tvDate, tvAmount, tvDescription, tvType;
     private ImageView ivIcon;
@@ -31,8 +35,13 @@ public class TransactionAdapter extends ArrayAdapter<Transaction> {
          tvType = convertView.findViewById(R.id.tv_type);
          ivIcon = convertView.findViewById(R.id.iv_icon);
 
+
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatNumber = NumberFormat.getNumberInstance(localeID);
+        String formattedAmount = formatNumber.format(transaction.getAmount());
+
         tvDate.setText(transaction.getDate());
-        tvAmount.setText(transaction.getType() == 0 ? "Rp -" + String.valueOf(transaction.getAmount()) : "Rp +" + String.valueOf(transaction.getAmount()));
+        tvAmount.setText(transaction.getType() == 0 ? "IDR -" + formattedAmount : "IDR +" + formattedAmount);
         tvAmount.setTextColor(transaction.getType() == 0 ? Color.parseColor("#DAFB1F68") : Color.parseColor("#61CE65"));
         tvDescription.setText(transaction.getDescription());
         tvType.setText(transaction.getType() == 0 ? "Expense" : "Income");
