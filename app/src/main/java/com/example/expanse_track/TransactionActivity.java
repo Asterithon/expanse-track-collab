@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class TransactionActivity extends AppCompatActivity {
     private ListView lvTransactions;
     private ArrayList<Transaction> list = new ArrayList<>();
-    private ImageButton btnDashboard, btnInput;
+    private ImageButton btnDashboard, btnInput, btnHome;
     private RadioGroup rdGroup;
     private RadioButton rdExpense, rdAll, rdIncome;
     // Ambil data dari intent
@@ -52,6 +52,14 @@ public class TransactionActivity extends AppCompatActivity {
         rdIncome = findViewById(R.id.rd_income);
         rdExpense = findViewById(R.id.rd_expense);
         rdAll = findViewById(R.id.rd_all);
+        btnHome = findViewById(R.id.btn_home);
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dashboard();
+            }
+        });
 
         rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
