@@ -92,35 +92,35 @@ public class InputActivity extends AppCompatActivity {
     }
 
     private void saveTransaction() {
-        String stramount = "" + inpAmount.getText();
-        String desc = "" + inpDesc.getText();
-        String date = "" + tvSelectedDate.getText();
-
-        Integer id=0;
-        int amount = Integer.parseInt(stramount);
-
+        String stramount = inpAmount.getText().toString().trim();
+        String desc = inpDesc.getText().toString().trim();
+        String date = tvSelectedDate.getText().toString().trim();
         int selectedId = rdGroup.getCheckedRadioButtonId();
-        int type = -1; // default
 
-        if (selectedId == R.id.rd_expense) {
-            type = 0;  // Pengeluaran = 0
-            rdExpense.setTextColor(Color.WHITE);
-        } else if (selectedId == R.id.rd_revenue) {
-            type = 1;  // Pemasukan = 1
-            rdRevenue.setTextColor(Color.WHITE);
+        // Validasi input
+        if (stramount.isEmpty() || desc.isEmpty() || selectedId == -1) {
+            Toast.makeText(this, "Please fill all fields and select transaction type", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        Transaction t = new Transaction(amount, desc, date, type, id);
+        int amount;
+        try {
+            amount = Integer.parseInt(stramount);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid amount value", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int type = (selectedId == R.id.rd_expense) ? 0 : 1;
+
+        Transaction t = new Transaction(amount, desc, date, type, 0);
 
         DbHelper dbHelper = new DbHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-
         String sql = "INSERT INTO `transaction`(`amount`, `description`, `date`, `type`) VALUES (?,?,?,?);";
         db.execSQL(sql, new Object[]{t.getAmount(), t.getDescription(), t.getDate(), t.getType()});
         Toast.makeText(this, "Transaction Recorded Successfully", Toast.LENGTH_LONG).show();
         finish();
-
     }
 
 }

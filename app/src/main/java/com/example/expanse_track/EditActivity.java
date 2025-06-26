@@ -105,26 +105,37 @@ public class EditActivity extends AppCompatActivity {
     }
 
     private void saveTransaction() {
-        String stramount = "" + inpAmount.getText();
-        String desc = "" + inpDesc.getText();
-        String date = showDate.getText().toString();
-        String tipe =  showType.getText().toString();
-        String strid = showId.getText().toString();
+        String stramount = inpAmount.getText().toString().trim();
+        String desc = inpDesc.getText().toString().trim();
+        String date = showDate.getText().toString().trim();
+        String tipe = showType.getText().toString().trim();
+        String strid = showId.getText().toString().trim();
 
-        int id = Integer.parseInt(strid);
-        int amount = Integer.parseInt(stramount);
-        int type = Integer.parseInt(tipe);
+        if (stramount.isEmpty() || desc.isEmpty() || date.isEmpty() || tipe.isEmpty() || strid.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields before saving", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int id, amount, type;
+        try {
+            id = Integer.parseInt(strid);
+            amount = Integer.parseInt(stramount);
+            type = Integer.parseInt(tipe);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid number format", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Transaction t = new Transaction(amount, desc, date, type, id);
 
         DbHelper dbHelper = new DbHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String sql = "UPDATE `transaction` SET `amount` = ?, `description` = ?, `date` = ?, `type` = ?  WHERE `id` = ?;";
+        String sql = "UPDATE `transaction` SET `amount` = ?, `description` = ?, `date` = ?, `type` = ? WHERE `id` = ?;";
         db.execSQL(sql, new Object[]{t.getAmount(), t.getDescription(), t.getDate(), t.getType(), t.getId()});
+
         Toast.makeText(this, "Transaction Edited Successfully", Toast.LENGTH_LONG).show();
         finish();
-
     }
 
 }
